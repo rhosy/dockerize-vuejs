@@ -1,24 +1,48 @@
-# docker-vuejs
+# Dockerize Vue JS Application 
 
-## Project setup
+# For Development
+## Docker
+Build docker image
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+docker build -t vue-app:dev .
 ```
 
-### Compiles and minifies for production
+ Run Docker Container
 ```
-npm run build
+docker run -v ${PWD}:/app -v /app/node_modules -p 8081:8080 --rm vue-app:dev
+```
+and then try visit [http://localhost:8181](http://localhost:8181) in your browser
+
+*Note : windows Users may not support ${PWD}, Please use absolute path instead of*
+
+## Docker Compose
+Build and Run using docker-compose
+```
+docker-compose up -d --build
 ```
 
-### Lints and fixes files
+# For Production
+
+## Docker
+Build docker image
 ```
-npm run lint
+docker build -f Dockerfile-prod -t vue-app:prod .
+```
+Run Docker Container
+```
+docker run -it -p 80:80 --rm vue-app:prod
+```
+and then try visit [http://localhost](http://localhost) in your browser
+
+## Docker Compose 
+Build and Run using docker-compose
+```
+docker-compose -f docker-compose-prod.yml up -d --build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+and then try visit [http://localhost](http://localhost) in your browser
+
+
+### Reference
+* [https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html](https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html)
+*  [https://qdmana.com/2021/09/20210901000128115o.html](hhttps://qdmana.com/2021/09/20210901000128115o.html)
